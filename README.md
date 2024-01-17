@@ -11,6 +11,5 @@ This authenticates to Google Cloud and then Google Artifact Registry.
       - name: Auth to Google
         uses: 'uwit-iam/action-auth-artifact-registry@main'
         with:
-          pypi: "${{ vars.IAM_GAR_PYPI }}"
           credentials: "${{ secrets.MCI_GCLOUD_AUTH_JSON }}"
 ```
