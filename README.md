@@ -18,3 +18,19 @@ This authenticates to Google Cloud and then Google Artifact Registry.
           # REQUIRED if you want private GAR PyPI access
           enable_private_pypi: true
 ```
+
+# Other important information
+
+Enabling the private PyPI repo involves installing a Python package. This will be installed via `pip`.
+
+Users of this action should **pre-configure the runner** as appropriate prior to calling this.
+
+Likely that means calling e.g., [actions/setup-python to set the correct default Python version](https://github.com/actions/setup-python)
+
+
+```yaml
+      - uses: actions/setup-python@v5
+        with:
+          # auto-detect Python version from file; alternatively you can set to explicit version if desired
+          python-version-file: pyproject.toml
+```
