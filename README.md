@@ -4,6 +4,7 @@ This authenticates to Google Cloud and then Google Artifact Registry.
 
 * Auth to Google Cloud (getting an access token)
 * Auth to Google Artifact Registry (`us-docker.pkg.dev`)
+* Enable PyPI on Google Artifact Registry
 
 # How to use it
 
@@ -12,4 +13,8 @@ This authenticates to Google Cloud and then Google Artifact Registry.
         uses: 'uwit-iam/action-auth-artifact-registry@main'
         with:
           credentials: "${{ secrets.MCI_GCLOUD_AUTH_JSON }}"
+          # REQUIRED if you want private GAR container registry access
+          enable_private_docker: true
+          # REQUIRED if you want private GAR PyPI access
+          enable_private_pypi: true
 ```
