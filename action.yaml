@@ -32,6 +32,7 @@ runs:
 
     - name: Setup IAM PyPI
       if: ${{ inputs.enable_iam_pypi }}
+      shell: bash
       run: |
           # install keyring so pip can talk to GAR PyPI
           pip install keyrings.google-artifactregistry-auth
