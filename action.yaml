@@ -6,6 +6,18 @@ inputs:
     type: string
     required: true
 
+  enable_private_docker:
+    description: Should the environment be updated to enable private GAR-based Docker?
+    type: boolean
+    required: false
+    default: false
+
+  enable_private_pypi:
+    description: Should the environment be updated to enable private GAR-based PyPI?
+    type: boolean
+    required: false
+    default: false
+
 runs:
   using: "composite"
   steps:
@@ -18,8 +30,16 @@ runs:
         token_format: 'access_token'
 
     - name: Auth to Google Artifact Registry
+      if: ${{ inputs.enable_private_docker }}
       shell: bash
       # https://github.com/google-github-actions/auth#authenticating-to-container-registry-and-artifact-registry
       # requires role: roles/iam.serviceAccountTokenCreator
       run: |-
         echo '${{ steps.auth.outputs.access_token }}' | docker login -u oauth2accesstoken --password-stdin https://us-docker.pkg.dev
+
+    - name: Setup IAM PyPI
+      if: ${{ inputs.enable_private_pypi }}
+      shell: bash
+      run: |
+          # install keyring so pip can talk to GAR PyPI
+          pip install keyrings.google-artifactregistry-auth
