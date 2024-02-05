@@ -30,7 +30,7 @@ runs:
         token_format: 'access_token'
 
     - name: Auth to Google Artifact Registry
-      if ${{ inputs.enable_private_docker }}
+      if: ${{ inputs.enable_private_docker }}
       shell: bash
       # https://github.com/google-github-actions/auth#authenticating-to-container-registry-and-artifact-registry
       # requires role: roles/iam.serviceAccountTokenCreator
