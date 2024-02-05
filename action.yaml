@@ -6,6 +6,12 @@ inputs:
     type: string
     required: true
 
+  enable_iam_pypi:
+    description: Should the environment be updated to work with IAM's PyPI on GAR?
+    type: boolean
+    required: false
+    default: false
+
 runs:
   using: "composite"
   steps:
@@ -23,3 +29,9 @@ runs:
       # requires role: roles/iam.serviceAccountTokenCreator
       run: |-
         echo '${{ steps.auth.outputs.access_token }}' | docker login -u oauth2accesstoken --password-stdin https://us-docker.pkg.dev
+
+    - name: Setup IAM PyPI
+      if: ${{ inputs.enable_iam_pypi }}
+      run: |
+          # install keyring so pip can talk to GAR PyPI
+          pip install keyrings.google-artifactregistry-auth
