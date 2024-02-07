@@ -4,7 +4,10 @@ This authenticates to Google Cloud and then Google Artifact Registry.
 
 * Auth to Google Cloud (getting an access token)
 * Auth to Google Artifact Registry (`us-docker.pkg.dev`)
-* Enable PyPI on Google Artifact Registry
+* Enable PyPI on Google Artifact Registry by installing an appropriate keyring via `pip`
+    * This **does not integrate with poetry** if you are using `pipx`. For that you can
+        * Manually run ` poetry self add keyrings.google-artifactregistry-auth`
+        * PR an extra input to this action (or ask @miker985 to do it)
 
 # How to use it
 
@@ -18,6 +21,15 @@ This authenticates to Google Cloud and then Google Artifact Registry.
           # REQUIRED if you want private GAR PyPI access
           enable_private_pypi: true
 ```
+
+# Outputs
+
+These outputs are all provided by the underling [google-github-actions/auth action's outputs](https://github.com/google-github-actions/auth?tab=readme-ov-file#outputs)
+
+* `project_id`: Provided or extracted value for the Google Cloud project ID.
+* `credentials_file_path`: Path on the local filesystem where the generated credentials file resides. Provided by Google auth action.
+* `auth_token`: The Google Cloud federated token (for Workload Identity Federation) or self-signed JWT (for a Service Account Key JSON).
+* `access_token`: The Google Cloud access token for calling other Google Cloud APIs.
 
 # Other important information
 
