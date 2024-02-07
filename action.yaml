@@ -23,7 +23,7 @@ outputs:
     description: Provided or extracted value for the Google Cloud project ID.
     value: ${{ steps.auth.outputs.project_id }}
   credentials_file_path:
-    description: Path on the local filesystem where the generated credentials file resides. Provided by Google auth action.
+    description: Path on the local filesystem where the generated credentials file resides.
     value: ${{ steps.auth.outputs.credentials_file_path }}
   auth_token:
     description: The Google Cloud federated token (for Workload Identity Federation) or self-signed JWT (for a Service Account Key JSON).

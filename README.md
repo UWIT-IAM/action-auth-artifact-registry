@@ -27,7 +27,7 @@ This authenticates to Google Cloud and then Google Artifact Registry.
 These outputs are all provided by the underling [google-github-actions/auth action's outputs](https://github.com/google-github-actions/auth?tab=readme-ov-file#outputs)
 
 * `project_id`: Provided or extracted value for the Google Cloud project ID.
-* `credentials_file_path`: Path on the local filesystem where the generated credentials file resides. Provided by Google auth action.
+* `credentials_file_path`: Path on the local filesystem where the generated credentials file resides.
 * `auth_token`: The Google Cloud federated token (for Workload Identity Federation) or self-signed JWT (for a Service Account Key JSON).
 * `access_token`: The Google Cloud access token for calling other Google Cloud APIs.
 
